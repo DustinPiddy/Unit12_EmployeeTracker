@@ -8,7 +8,7 @@ var connection = mysql.createConnection({
 
     user: 'root',
 
-    password: 'Du$tball5',
+    password: 'password',
     database: "employees_db"
 });
 
@@ -24,8 +24,11 @@ function promptQuestion() {
         message: "What do you want to do?",
         choices: [
             "Add Departments, Roles and Employees.",
+
             "View Departments, Roles and Employees.",
+
             "Update Departments, Roles and Employees.",
+
             "Exit",
         ]
     })
@@ -34,7 +37,7 @@ function promptQuestion() {
             case "Add Departments, Roles and Employees.":
                 addQuestion();
                 break;
-            case "Remove Departments, Roles and Employees.":
+            case "View Departments, Roles and Employees.":
                 viewQuestion();
                 break;
             case "Update Departments, Roles and Employees.":
@@ -51,7 +54,7 @@ function addQuestion() {
         name: "action",
         type: "list",
         message: "What do you want to add?",
-        Choices: [
+        choices: [
             "Add Departments",
             "Add Roles",
             "Add Employees",
@@ -80,7 +83,7 @@ function viewQuestion() {
         name: "action",
         type: "list",
         message: "What do you want to view?",
-        Choices: [
+        choices: [
             "View Departments",
             "View Roles",
             "View Employees",
@@ -109,7 +112,7 @@ function updateQuestion() {
         name: "action",
         type: "list",
         message: "What do you want to view?",
-        Choices: [
+        choices: [
             "Update Departments",
             "Update Roles",
             "Update Employees",
@@ -184,7 +187,7 @@ function viewDepartment(itemToView) {
     connection.query(query, function(err, res) {
         if (err) throw err;
         console.log(res);
-        promptQuestions();
+        promptQuestion();
     });
     askOneQuestion("Which department do you want to view?", (answer)=> {
         console.log(answer.userInput);
@@ -258,7 +261,7 @@ function askAgain (question, callback) {
         }
         else
         {
-            promptQuestions();
+            promptQuestion();
         }
     });
 
