@@ -134,5 +134,46 @@ function updateQuestion() {
 }
 
 function addDepartment() {
-    
+    askOneQuestion("What's the name of the Department?", (answer)=> {
+        console.log(answer.userInput);
+        
+        askAgain("Want to add another?", () => {
+            addDepartment();
+        });
+    });
+}
+
+function addRole() {
+    const questions = [
+        {
+            type : 'input',
+            name : 'title',
+            message : "Role Title?"
+        },
+        {
+            type : 'number',
+            name : 'salary',
+            message : "Role Salary?"
+        },
+        {
+            type : 'number',
+            name : 'departmentID',
+            message : "Whats the department ID for the role?"
+        }
+    ];
+    askMultipleQuestions(questions, (answers)=> {        
+        askAgain("Want to add another?", () => {
+            addRole();
+        });
+    });
+}
+
+function addEmployee() {
+    askOneQuestion("Employee name?", (answer)=> {
+        console.log(answer.userInput);
+        
+        askAgain("Would you like to add another?", () => {
+            addEmployee();
+        });
+    });
 }
