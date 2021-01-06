@@ -1,0 +1,26 @@
+{
+  "name": "unit12_employeetracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DustinPiddy/Unit12_EmployeeTracker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DustinPiddy/Unit12_EmployeeTracker/issues"
+  },
+  "homepage": "https://github.com/DustinPiddy/Unit12_EmployeeTracker#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "express": "4.17.1",
+    "inquirer": "7.3.3",
+    "mysql": "2.18.1",
+    "node": "15.2.1"
+  }
+}
