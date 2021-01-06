@@ -87,7 +87,7 @@ function viewQuestion() {
             "Go Back"
         ]
     })
-    .then(function(answer){
+    .then(async function(answer){
         switch(answer.action) {
             case "View Departments":
                 viewDepartment();
@@ -116,16 +116,16 @@ function updateQuestion() {
             "Go Back"
         ]
     })
-    .then(function(answer){
+    .then(async function(answer){
         switch(answer.action) {
             case "Update Departments":
-                viewDepartment();
+                updateDepartment();
                 break;
             case "Update Roles":
-                viewRole();
+                updateRole();
                 break;
             case "Update Employees":
-                viewEmployee();
+                updateEmployee();
             case "Go Back":
                 connection.end();
                 break;
@@ -214,4 +214,66 @@ function viewEmployee(itemToView) {
         });
     });
 }
+//update functions
+function updateDepartment(itemToUpdate) {
+    askOneQuestion("Which department do you want to update?", (answer)=> {
+        console.log(answer.userInput);
+        
+        askAgain("Update another?", () => {
+            updateDepartment();
+        });
+    });
+}
 
+function updateRole(itemToUpdate) {
+    askOneQuestion("Which role do you want to update?", (answer)=> {
+        console.log(answer.userInput);
+        
+        askAgain("Update another?", () => {
+            updateRole();
+        });
+    });
+}
+
+function updateEmployee(itemToUpdate) {
+    askOneQuestion("Which employee do you want to update?", (answer)=> {
+        console.log(answer.userInput);
+        
+
+        askAgain("Update another?", () => {
+            updateEmployee();
+        });
+    });
+}
+
+function askAgain (question, callback) {
+    inquirer.prompt({
+        name: "answer",
+        type: "confirm",
+        message : question
+    }).then(function (answer) {
+        if(answer.answer)
+        {
+            callback();
+        }
+        else
+        {
+            promptQuestions();
+        }
+    });
+
+}
+
+function askOneQuestion(question, callback) {
+    inquirer.prompt({
+        name: "userInput",
+        type: "input",
+        message: question
+    })
+    .then((answer) => callback(answer));
+}
+
+function askMultipleQuestions(questionsArray, callback) {
+    inquirer.prompt(questionsArray)
+    .then((answer) => callback(answer));
+}
