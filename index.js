@@ -16,7 +16,7 @@ connection.connect(function(err){
     if (err) throw err;
     promptQuestion();
 });
-
+//question prompts
 function promptQuestion() {
     inquirer.prompt({
         name: "action",
@@ -45,7 +45,7 @@ function promptQuestion() {
         }
     });
 }
-
+//add questions
 function addQuestion() {
     inquirer.prompt({
         name: "action",
@@ -74,7 +74,7 @@ function addQuestion() {
         }
     });
 }
-
+//view questions
 function viewQuestion() {
     inquirer.prompt({
         name: "action",
@@ -103,7 +103,7 @@ function viewQuestion() {
         }
     });
 }
-
+//update questions
 function updateQuestion() {
     inquirer.prompt({
         name: "action",
@@ -133,6 +133,7 @@ function updateQuestion() {
     });
 }
 
+//add functions
 function addDepartment() {
     askOneQuestion("What's the name of the Department?", (answer)=> {
         console.log(answer.userInput);
@@ -172,8 +173,45 @@ function addEmployee() {
     askOneQuestion("Employee name?", (answer)=> {
         console.log(answer.userInput);
         
-        askAgain("Would you like to add another?", () => {
+        askAgain("Want to add another?", () => {
             addEmployee();
         });
     });
 }
+//view functions
+function viewDepartment(itemToView) {
+    var query = "SELECT id, name FROM departments";
+    connection.query(query, function(err, res) {
+        if (err) throw err;
+        console.log(res);
+        promptQuestions();
+    });
+    askOneQuestion("Which department do you want to view?", (answer)=> {
+        console.log(answer.userInput);
+
+        askAgain("View another?", () => {
+            viewDepartment();
+        });
+    });
+}
+
+function viewRole(itemToView) {
+    askOneQuestion("What role do you want to view?", (answer)=> {
+        console.log(answer.userInput);
+
+        askAgain("View another?", () => {
+            viewRole();
+        });
+    });
+}
+
+function viewEmployee(itemToView) {
+    askOneQuestion("Which employee do you want to view?", (answer)=> {
+        console.log(answer.userInput);
+
+        askAgain("View another?", () => {
+            viewEmployee();
+        });
+    });
+}
+
